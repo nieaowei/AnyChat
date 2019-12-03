@@ -26,72 +26,73 @@ public class UserDao {
 	 * @throws ExceptionHandler 
 	 */
 	public boolean addUser(UserModel userModel) throws SQLException, ExceptionHandler{
-		String sql = "insert into anychat_user values(seq_id.nextval,seq_qq.nextval,?,?,?,?,?,to_date ( ? , 'YYYY-MM-DD' ),?,?,?,?)";
+		String sql = "insert into anychat_user ";
+		String sql1="(qq";
+		String sql2="values(seq_qq.nextval";
 		List<Object> para = new ArrayList<>();
 		if (userModel.getPwd()!=null) {
+			sql1+=",pwd";
+			sql2+=",?";
 			para.add(userModel.getPwd());
 		}else {
 			throw new ExceptionHandler("缺少密码");
-//			return false;
 		}
-		
 		if (userModel.getSign()!=null) {
+			sql1+=",sign";
+			sql2+=",?";
 			para.add(userModel.getSign());
-		}else {
-			para.add("null");
 		}
-		
 		if (userModel.getPhoto()!=null) {
+			sql1+=",photo";
+			sql2+=",?";
 			para.add(userModel.getPhoto());
-		}else {
-			throw new ExceptionHandler("缺少照片");
-//			return false;
 		}
-		
 		if (userModel.getNickname()!=null) {
+			sql1+=",nickname";
+			sql2+=",?";
 			para.add(userModel.getNickname());
 		}else {
 			throw new ExceptionHandler("缺少昵称");
-//			return false;
 		}
-		
 		if (userModel.getSex()!=null) {
+			sql1+=",sex";
+			sql2+=",?";
 			para.add(userModel.getSex());
 		}else {
 			throw new ExceptionHandler("缺少性别");
-//			return false;
 		}
-		
 		if (userModel.getBirthday()!=null) {
+			sql1+=",birthday";
+			sql2+=",to_date(?,'YYYY-MM-DD')";
 			para.add(userModel.getBirthday());
-		}else {
-			para.add("null");
 		}
-		
 		if (userModel.getTelephone()!=null) {
+			sql1+=",telephone";
+			sql2+=",?";
 			para.add(userModel.getTelephone());
-		}else {
-			para.add("null");
 		}
-		
 		if (userModel.getEmail()!=null) {
+			sql1+=",email";
+			sql2+=",?";
 			para.add(userModel.getEmail());
-		}else {
-			para.add("null");
 		}
-		
 		if (userModel.getAddr()!=null) {
+			sql1+=",addr";
+			sql2+=",?";
 			para.add(userModel.getAddr());
-		}else {
-			para.add("null");
 		}
-		
-		if (userModel.getTemp()!=null) {
-			para.add(userModel.getTemp());
+		if (userModel.getQuestion()!=null) {
+			sql1+=",question";
+			sql2+=",?";
+			para.add(userModel.getQuestion());
 		}else {
-			para.add("null");
+			throw new ExceptionHandler("缺少问题");
 		}
-		
+		sql1+=") ";
+		sql2+=")";
+		sql+=sql1;
+		sql+=sql2;
+		System.out.println(sql);
 		System.out.println(para.toString());
 		Object res = new Dbhelper().insert(sql,"qq",para.toArray());
 		if(res!=null) {
@@ -113,7 +114,6 @@ public class UserDao {
 		if (userModel.getPwd()==null) {
 			throw new ExceptionHandler("密码为空");
 		}
-		
 		String sql = "select qq from anychat_user where QQ=? and PWD=?";
 		ArrayList<Object> params=new ArrayList<>();
 		params.add(userModel.getQq());
@@ -122,7 +122,17 @@ public class UserDao {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean updateStatus(UserModel userModel) throws SQLException {
+		String sql = "update anychat_user set status=? , ip=? where qq=?";
+		
+		if (new Dbhelper().update(sql, userModel.getStatus(),userModel.getIp(),userModel.getQq())!=0) {
+			return true;
 		}
+		return false;
+	}
+	
 	/**
 	 * 通过qq查询个人信息 查看个人信息   在个人信息页面显示全部资料  不显示密码 
 	 * @param qq  这个参数，在用户点击查看个人资料按钮时获取，并传送给这个方法

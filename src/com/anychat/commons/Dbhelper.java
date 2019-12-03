@@ -148,19 +148,21 @@ public class Dbhelper {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Map<String, Object>> findMutipl(String sql, List<Object> params) throws Exception {
+	public List<Map<String, Object>> findMutipl(String sql, List<Object> params) throws Exception {		
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = null;
 		try {
-			
-				conn = this.getConn();
-				pstmt = conn.prepareStatement(sql);
-				
-             setParamsList(pstmt, params);
-				rs = pstmt.executeQuery();
-
-			// 获取所有列名
+			conn = this.getConn();
+			// 获取预编译对象
+			pstmt = conn.prepareStatement(sql);
+			// 设置参数
+			setParamsList(pstmt, params);
+			// 执行查询，返回结果集对象
+			rs = pstmt.executeQuery();
+			// 获取所有列的名称
 			List<String> columnNames = getColumnNames(rs);
+			
+			
 			while (rs.next()) {
 				map = new HashMap<String, Object>();
 				for (String name : columnNames) {

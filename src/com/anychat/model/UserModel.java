@@ -7,7 +7,6 @@ package com.anychat.model;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author nieaowei
@@ -17,15 +16,18 @@ public class UserModel {
 	
 	private String qq;
 	private String pwd;
+	private String status;
+	private String ip;
 	private String sign;
 	private byte[] photo;
 	private String nickname;
 	private String sex;
 	private String birthday;
 	private String telephone;
+	private String question;
 	private String email;
 	private String addr;
-	private String temp;
+	private String created;
 	
 	/**
 	 * 
@@ -34,6 +36,11 @@ public class UserModel {
 		// TODO Auto-generated constructor stub
 	}
 	
+//	public UserModel(Map<String,Object> params) {
+//		// TODO Auto-generated constructor stub
+//		
+//	}
+
 	public void resetUserModel(Map<String, Object> daoData) {
 			
 			this.qq = daoData.get("QQ").toString();
@@ -46,9 +53,47 @@ public class UserModel {
 			this.telephone = (String) daoData.get("TELEPHONE");
 			this.email = (String) daoData.get("EMAIL");
 			this.addr = (String) daoData.get("ADDR");
-			this.temp = (String) daoData.get("TEMP");
 	}
 	
+	
+	
+	/**
+	 * @param qq
+	 * @param pwd
+	 * @param status
+	 * @param ip
+	 * @param sign
+	 * @param photo
+	 * @param nickname
+	 * @param sex
+	 * @param birthday
+	 * @param telephone
+	 * @param question
+	 * @param email
+	 * @param addr
+	 * @param created
+	 */
+	public UserModel(String qq, String pwd, String status, String ip, String sign, byte[] photo, String nickname,
+			String sex, String birthday, String telephone, String question, String email, String addr, String created) {
+		super();
+		this.qq = qq;
+		this.pwd = pwd;
+		this.status = status;
+		this.ip = ip;
+		this.sign = sign;
+		this.photo = photo;
+		this.nickname = nickname;
+		this.sex = sex;
+		this.birthday = birthday;
+		this.telephone = telephone;
+		this.question = question;
+		this.email = email;
+		this.addr = addr;
+		this.created = created;
+	}
+
+
+
 	/**
 	 * @param qq
 	 * @param pwd
@@ -75,7 +120,6 @@ public class UserModel {
 		this.telephone = telephone;
 		this.email = email;
 		this.addr = addr;
-		this.temp = temp;
 	}
 	
 	public UserModel(String pwd, String sign, byte[] photo, String nikename, String sex, String birthday,
@@ -90,7 +134,6 @@ public class UserModel {
 		this.telephone = telephone;
 		this.email = email;
 		this.addr = addr;
-		this.temp = temp;
 	}
 	/**
 	 * 
@@ -101,21 +144,20 @@ public class UserModel {
 		this.pwd=pwd;
 	}
 	
-	public UserModel(Map<String, Object> daoData) {
-		JSONObject jsonObject=(JSONObject) JSON.toJSON(daoData);
-		UserModel userModel =jsonObject.toJavaObject(UserModel.class);
-		this.qq = userModel.qq;
-		this.pwd = userModel.pwd;
-		this.sign = userModel.sign;
-		this.photo = userModel.photo;
-		this.nickname = userModel.nickname;
-		this.sex = userModel.sex;
-		this.birthday = userModel.birthday;
-		this.telephone = userModel.telephone;
-		this.email = userModel.email;
-		this.addr = userModel.addr;
-		this.temp = userModel.temp;
-	}
+//	public UserModel(Map<String, Object> daoData) {
+//		JSONObject jsonObject=(JSONObject) JSON.toJSON(daoData);
+//		UserModel userModel =jsonObject.toJavaObject(UserModel.class);
+//		this.qq = userModel.qq;
+//		this.pwd = userModel.pwd;
+//		this.sign = userModel.sign;
+//		this.photo = userModel.photo;
+//		this.nickname = userModel.nickname;
+//		this.sex = userModel.sex;
+//		this.birthday = userModel.birthday;
+//		this.telephone = userModel.telephone;
+//		this.email = userModel.email;
+//		this.addr = userModel.addr;
+//	}
 	/**
 	 * @param qq2
 	 */
@@ -124,6 +166,104 @@ public class UserModel {
 		this.qq=qq;
 	}
 
+
+
+	
+
+
+
+	/**
+	 * @param map
+	 */
+	public UserModel(Map<String, String[]> map) {
+		// TODO Auto-generated constructor stub
+//		System.out.println(JSON.toJSONString(map));
+		if (map.get("qq")!=null) {
+			this.qq=map.get("qq")[0];
+		}
+		if (map.get("pwd")!=null) {
+			this.pwd=map.get("pwd")[0];
+		}
+		if (map.get("sign")!=null) {
+			this.sign=map.get("sign")[0];
+		}
+		if (map.get("status")!=null) {
+			this.status=map.get("status")[0];
+		}
+		if (map.get("ip")!=null) {
+			this.ip=map.get("ip")[0];
+		}
+		if (map.get("nickname")!=null) {
+			this.nickname=map.get("nickname")[0];
+		}
+		if (map.get("sex")!=null) {
+			this.sex=map.get("sex")[0];
+		}
+		if (map.get("birthday")!=null) {
+			this.birthday=map.get("birthday")[0];
+		}
+		if (map.get("telephone")!=null) {
+			this.telephone=map.get("telephone")[0];
+		}
+		if (map.get("question")!=null) {
+			this.question=map.get("question")[0];
+		}
+		if (map.get("email")!=null) {
+			this.email=map.get("email")[0];
+		}
+		if (map.get("addr")!=null) {
+			this.addr=map.get("addr")[0];
+		}
+		if (map.get("created")!=null) {
+			this.created=map.get("created")[0];
+		}
+		System.out.println(JSON.toJSONString(this));
+	}
+
+	public UserModel(Map<String, String[]> map,byte[] photo) {
+		if (map.get("qq")!=null) {
+			this.qq=map.get("qq")[0];
+		}
+		if (map.get("pwd")!=null) {
+			this.pwd=map.get("pwd")[0];
+		}
+		if (map.get("sign")!=null) {
+			this.sign=map.get("sign")[0];
+		}
+		if (map.get("status")!=null) {
+			this.status=map.get("status")[0];
+		}
+		if (map.get("ip")!=null) {
+			this.ip=map.get("ip")[0];
+		}
+		if (map.get("nickname")!=null) {
+			this.nickname=map.get("nickname")[0];
+		}
+		if (map.get("sex")!=null) {
+			this.sex=map.get("sex")[0];
+		}
+		if (map.get("birthday")!=null) {
+			this.birthday=map.get("birthday")[0];
+		}
+		if (map.get("telephone")!=null) {
+			this.telephone=map.get("telephone")[0];
+		}
+		if (map.get("question")!=null) {
+			this.question=map.get("question")[0];
+		}
+		if (map.get("email")!=null) {
+			this.email=map.get("email")[0];
+		}
+		if (map.get("addr")!=null) {
+			this.addr=map.get("addr")[0];
+		}
+		if (map.get("created")!=null) {
+			this.created=map.get("created")[0];
+		}
+		if (photo !=null) {
+			this.photo=photo;
+		}
+	}
 	/**
 	 * @return the qq
 	 */
@@ -244,21 +384,69 @@ public class UserModel {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
+	
 	/**
-	 * @return the temp
+	 * @return the status
 	 */
-	public String getTemp() {
-		return temp;
+	public String getStatus() {
+		return status;
 	}
+
 	/**
-	 * @param temp the temp to set
+	 * @param status the status to set
 	 */
-	public void setTemp(String temp) {
-		this.temp = temp;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	
-	
-	
+
+	/**
+	 * @return the ip
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * @param ip the ip to set
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	/**
+	 * @return the question
+	 */
+	public String getQuestion() {
+		return question;
+	}
+
+	/**
+	 * @param question the question to set
+	 */
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	/**
+	 * @return the created
+	 */
+	public String getCreated() {
+		return created;
+	}
+
+	/**
+	 * @param created the created to set
+	 */
+	public void setCreated(String created) {
+		this.created = created;
+	}
+
+	/**
+	 * @param nickname the nickname to set
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	
 	
 	

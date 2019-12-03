@@ -4,6 +4,8 @@
  */
 package com.anychat.handler;
 
+import java.util.Map;
+
 import com.anychat.commons.ExceptionHandler;
 import com.anychat.commons.Result;
 import com.anychat.dao.UserDao;
@@ -42,6 +44,15 @@ public class RegisterHandler extends UserModel{
 		result = register();
 	}
 	
+
+	/**
+	 * @param map
+	 */
+	public RegisterHandler(Map<String, String[]> map,byte[] photo) {
+		// TODO Auto-generated constructor stub
+		super(map,photo);
+		result = register();
+	}
 	public Result register() {
 		// TODO 一些判空处理
 		try {
@@ -49,6 +60,7 @@ public class RegisterHandler extends UserModel{
 				return new Result(200, "注册成功",this.getQq());
 			}
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return new Result((ExceptionHandler) e);
 		}
 		return new Result(ExceptionHandler.NOKOWN_ERRORS, "未知错误");

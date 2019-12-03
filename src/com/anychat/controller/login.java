@@ -1,6 +1,7 @@
 package com.anychat.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +32,11 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String qq=request.getParameter("qq");
-		String pwd=request.getParameter("pwd");
-		System.out.println("qq:"+qq+"pwd:"+pwd);
+		Map<String, String[]> map=request.getParameterMap();
+		String ip=request.getRemoteHost();
+		System.out.println(request.getRemoteAddr());
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(JSON.toJSONString(new LoginHandler(qq, pwd).getResult()));
+		response.getWriter().print(JSON.toJSONString(new LoginHandler(map,ip).getResult()));
 	}
 
 	/**

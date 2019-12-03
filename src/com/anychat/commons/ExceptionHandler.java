@@ -21,6 +21,11 @@ public class ExceptionHandler extends Exception{
 	public final static int USER_ERROR=204;
 	public final static int LACK_PARA=205;//缺少参数
 	public final static int LACK_PWD=206;
+	public final static int LACK_PHOTO=207;
+	public final static int LACK_SEX=208;
+	public final static int LACK_NICKNAME=209;
+	public final static int LACK_QUSETION=210;
+	public final static int FRIEND_EXIST=211;
 	/**
 	 * @return the result
 	 */
@@ -31,14 +36,12 @@ public class ExceptionHandler extends Exception{
 	 * 抛出异常
 	 */
 	public ExceptionHandler(String msg) {
-		// TODO Auto-generated constructor stub
 		super(msg);
 	}
 	/**
 	 * 
 	 */
 	public ExceptionHandler(Exception e,String msg) {
-		// TODO Auto-generated constructor stub
 		Result=compare(e, msg);
 	}
 	/**
@@ -68,6 +71,18 @@ public class ExceptionHandler extends Exception{
 			return "账号为空";
 		case PASSWORD_EMPTY:
 			return "密码为空";
+		case LACK_NICKNAME:
+			return "缺少昵称";
+		case LACK_PHOTO:
+			return "缺少照片";
+		case LACK_PWD:
+			return "缺少密码";
+		case LACK_SEX:
+			return "缺少性别";
+		case LACK_QUSETION:
+			return "缺少问题";
+		case FRIEND_EXIST:
+			return "您已添加该好友";
 		default:
 			return "未知错误";
 		}
@@ -84,6 +99,16 @@ public class ExceptionHandler extends Exception{
 			return PASSWORD_EMPTY;
 		case "账号为空":
 			return USENAME_EMPTY;
+		case "缺少照片":
+			return LACK_PHOTO;
+		case "缺少性别":
+			return LACK_SEX;
+		case "缺少昵称":
+			return LACK_NICKNAME;
+		case "缺少问题":
+			return LACK_QUSETION;
+		case "您已添加该好友":
+			return FRIEND_EXIST;
 		default:
 			return NOKOWN_ERRORS;
 		}

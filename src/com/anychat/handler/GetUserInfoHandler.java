@@ -32,14 +32,6 @@ public class GetUserInfoHandler extends UserModel{
 		// TODO Auto-generated constructor stub
 		super(qq);
 		result=getUserInfo();
-//		
-//		try {
-//			FileOutputStream fileOutputStream=new FileOutputStream("/Users/nieaowei/Desktop/AnyChat/1.png");
-//			fileOutputStream.write(this.getPhoto());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
 	
 	private Result getUserInfo() {
