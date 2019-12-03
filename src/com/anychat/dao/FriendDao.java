@@ -8,9 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
 import com.anychat.commons.Dbhelper;
+import com.anychat.commons.Result;
 import com.anychat.model.FriendModel;
 import com.anychat.model.UserModel;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * @author nieaowei
@@ -18,30 +22,44 @@ import com.anychat.model.UserModel;
  */
 public class FriendDao {
 
-	public Map<String, Map<String, String>> getFriendList(UserModel userModel) throws Exception {
-		String sql="select ANYCHAT_SUBGROUP.SNAME,fqq,fstatus from ANYCHAT_FRIEND,"
-				+ "ANYCHAT_SUBGROUP where ANYCHAT_FRIEND.QQ=? and ANYCHAT_FRIEND.SID=ANYCHAT_SUBGROUP.SID";
+	public Map<String, Map<String, Map<String,String>>> getFriendList(UserModel userModel) throws Exception {
+		String sql="select fqq,fstatus,ANYCHAT_SUBGROUP.SNAME,NICKNAME from ANYCHAT_FRIEND,ANYCHAT_SUBGROUP,"
+				+ "ANYCHAT_USER where ANYCHAT_FRIEND.QQ=? and ANYCHAT_FRIEND.SID=ANYCHAT_SUBGROUP.SID and ANYCHAT_FRIEND.FQQ=ANYCHAT_USER.QQ";
 		List<Object> params=new ArrayList<Object>();
 		params.add(userModel.getQq());
 		List<Map<String, Object>> result =new Dbhelper().findMutipl(sql, params);
+		
+//		System.out.println(JSON.toJSONString(new Result(200,"xx",result)));
+		
 		if (result!=null) {
-			Map<String, Map<String, String>> map = new HashMap<>();
+			Map<String, Map<String, Map<String,String>>> map = new HashMap<>();
+			
 			for (Map<String, Object> map1 : result) {
-				String[] values=new String[3];
-				Map<String, String> temp = new HashMap<>();
+				String[] values=new String[4];
+				Map<String, Map<String, String>> temp = new HashMap<>();
+				Map<String, String> temp2=new HashMap<>();
+				//处理数据
 				map1.forEach((k,v)->{
 					if (k.toString().equals("SNAME")) {
 						values[0]=v.toString();
 					}else if (k.toString().equals("FQQ")) {
 						values[1]=v.toString();
-					}else {
+					}else if (k.toString().equals("NICKNAME")){
 						values[2]=v.toString();
+					}else {
+						values[3]=v.toString();
 					}
 				});
 				if (map.containsKey(values[0])) {
-					map.get(values[0]).put(values[1], values[2]);
+					if (temp.containsKey(values[1])) {
+						map.get(values[0]).get(values[1]).put(values[2], values[3]);
+					}else {
+						temp2.put(values[2], values[3]);
+						map.get(values[0]).put(values[1], temp2);
+					}
 				}else {
-					temp.put(values[1], values[2]);
+					temp2.put(values[2], values[3]);
+					temp.put(values[1], temp2);
 					map.put(values[0], temp);
 				}
 			}	

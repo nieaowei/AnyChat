@@ -24,7 +24,7 @@ public class GetUserInfoHandler extends UserModel{
 	public Result getResult() {
 		return result;
 	}
-
+ 
 	/**
 	 * 
 	 */
@@ -32,6 +32,7 @@ public class GetUserInfoHandler extends UserModel{
 		// TODO Auto-generated constructor stub
 		super(qq);
 		result=getUserInfo();
+		
 	}
 	
 	private Result getUserInfo() {

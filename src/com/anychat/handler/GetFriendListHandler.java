@@ -36,7 +36,7 @@ public class GetFriendListHandler extends UserModel{
 	private Result getFriendList() {
 		try {
 			
-			Map<String,Map<String, String>> data=new FriendDao().getFriendList(this);
+			Map<String, Map<String, Map<String,String>>> data=new FriendDao().getFriendList(this);
 			if (data!=null) {
 				return new Result(200,"获取成功",data);
 			}
