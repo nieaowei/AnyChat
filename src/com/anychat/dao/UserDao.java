@@ -18,6 +18,18 @@ import com.anychat.model.UserModel;
  * 该类中所有的异常都抛给handler处理并定位异常
  */
 public class UserDao {
+	
+	public boolean setStatus(UserModel userModel) throws SQLException {
+		String sql="update anychat_user set status=? where qq=?";
+		List<Object> params=new ArrayList<>();
+		params.add(userModel.getStatus());
+		params.add(userModel.getQq());
+		if (new Dbhelper().update(sql, params.toArray())!=0) {
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * 在数据库用户表中增加一位用户
 	 * @param userModel

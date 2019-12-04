@@ -35,8 +35,7 @@ public class login extends HttpServlet {
 		Map<String, String[]> map=request.getParameterMap();
 		String ip=request.getRemoteHost();
 		System.out.println(request.getRemoteAddr());
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(JSON.toJSONString(new LoginHandler(map,ip).getResult()));
+		response.getOutputStream().write(JSON.toJSONString(new LoginHandler(map,ip).getResult()).getBytes());
 	}
 
 	/**

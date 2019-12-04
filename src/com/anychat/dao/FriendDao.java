@@ -29,8 +29,6 @@ public class FriendDao {
 		params.add(userModel.getQq());
 		List<Map<String, Object>> result =new Dbhelper().findMutipl(sql, params);
 		
-//		System.out.println(JSON.toJSONString(new Result(200,"xx",result)));
-		
 		if (result!=null) {
 			Map<String, Map<String, Map<String,String>>> map = new HashMap<>();
 			

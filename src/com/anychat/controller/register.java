@@ -45,8 +45,8 @@ public class register extends HttpServlet {
 		byte[] photo=new byte[(int) part.getSize()];
 		inputStream.read(photo);
 		inputStream.close();
-		response.setCharacterEncoding("UTF-8");
-		response.getOutputStream().write(JSON.toJSONString(new RegisterHandler(map,photo).getResult()).getBytes("UTF-8"));
+//		response.setCharacterEncoding("UTF-8");
+		response.getOutputStream().write(JSON.toJSONString(new RegisterHandler(map,photo).getResult()).getBytes());
 	}
 
 	/**

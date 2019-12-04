@@ -31,8 +31,9 @@ public class getFriendList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().print(JSON.toJSONString(new GetFriendListHandler(request.getParameterMap()).getResult()));
+//		response.setCharacterEncoding("UTF-8");
+//		response.getWriter().print(JSON.toJSONString(new GetFriendListHandler(request.getParameterMap()).getResult()));
+		response.getOutputStream().write(JSON.toJSONString(new GetFriendListHandler(request.getParameterMap()).getResult()).getBytes());
 	}
 
 	/**

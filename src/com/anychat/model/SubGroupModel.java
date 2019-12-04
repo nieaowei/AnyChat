@@ -4,6 +4,8 @@
  */
 package com.anychat.model;
 
+import java.util.Map;
+
 /**
  * @author nieaowei
  *
@@ -13,6 +15,24 @@ public class SubGroupModel {
 	private String qq;
 	private String sname;
 	private String created;
+	/**
+	 * @param map
+	 */
+	public SubGroupModel(Map<String, String[]> map) {
+		// TODO Auto-generated constructor stub
+		if (map.get("sid")!=null) {
+			this.sid=map.get("sid")[0];
+		}
+		if (map.get("qq")!=null) {
+			this.qq=map.get("qq")[0];
+		}
+		if (map.get("sname")!=null) {
+			this.sname=map.get("sname")[0];
+		}
+		if (map.get("created")!=null) {
+			this.created=map.get("created")[0];
+		}
+	}
 	/**
 	 * @return the sid
 	 */
