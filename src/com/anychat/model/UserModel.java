@@ -7,6 +7,7 @@ package com.anychat.model;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * @author nieaowei
@@ -19,6 +20,7 @@ public class UserModel {
 	private String status;
 	private String ip;
 	private String sign;
+	@JSONField(serialize=false)  
 	private byte[] photo;
 	private String nickname;
 	private String sex;
@@ -49,7 +51,13 @@ public class UserModel {
 			this.photo = (byte[]) daoData.get("PHOTO");
 			this.nickname = (String) daoData.get("NICKNAME");
 			this.sex = (String) daoData.get("SEX");
-			this.birthday = (String) daoData.get("BIRTHDAY").toString();
+			try {
+				this.birthday = (String) daoData.get("BIRTHDAY");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+			}
+			
 			this.telephone = (String) daoData.get("TELEPHONE");
 			this.email = (String) daoData.get("EMAIL");
 			this.addr = (String) daoData.get("ADDR");

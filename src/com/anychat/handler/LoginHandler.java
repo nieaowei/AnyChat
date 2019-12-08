@@ -48,6 +48,7 @@ public class LoginHandler extends UserModel{
 			
 		} catch (Exception e) {//捕获并定位其他错误
 //			return new Result(ExceptionHandler.NOKOWN_ERRORS, "username format is error.");
+//			e.printStackTrace()
 			return new Result((ExceptionHandler) e);
 		}
 		//账号密码错误

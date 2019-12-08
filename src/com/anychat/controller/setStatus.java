@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.anychat.handler.SetStatusHandler;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
 
 /**
  * Servlet implementation class setStatus

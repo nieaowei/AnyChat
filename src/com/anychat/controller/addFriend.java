@@ -33,7 +33,9 @@ public class addFriend extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map<String, String[]> map = request.getParameterMap();
-
+//		request.setCharacterEncoding("UTF-8");
+		System.out.println("123"+request.getParameter("sname"));
+		System.out.println("123"+request.getParameter("qq"));
 		response.getOutputStream().write(JSON.toJSONString(new AddFriendHandler(map).getResult()).getBytes());
 	}
 

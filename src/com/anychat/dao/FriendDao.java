@@ -9,12 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
 import com.anychat.commons.Dbhelper;
-import com.anychat.commons.Result;
 import com.anychat.model.FriendModel;
 import com.anychat.model.UserModel;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * @author nieaowei
@@ -81,6 +78,19 @@ public class FriendDao {
 		sql+=sql2;
 		System.out.println(sql);
 		if (new Dbhelper().update(sql, params.toArray())!=0) {
+			return true;
+		}
+		return false;
+	}
+	public boolean findFidAndFip(FriendModel friendModel) throws Exception {
+		String sqString="select fid,fip from anychat_friend where qq=? and fqq=?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(friendModel.getQq());
+		params.add(friendModel.getFqq());
+		Map<String, Object> dataMap = new Dbhelper().findSingle(sqString, params);
+		if (dataMap!=null) {
+			friendModel.setFid(dataMap.get("FID").toString());
+			friendModel.setFip(dataMap.get("FIP").toString());
 			return true;
 		}
 		return false;

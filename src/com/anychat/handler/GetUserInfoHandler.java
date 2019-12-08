@@ -4,7 +4,6 @@
  */
 package com.anychat.handler;
 
-import java.io.FileOutputStream;
 
 import com.anychat.commons.ExceptionHandler;
 import com.anychat.commons.Result;

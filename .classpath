@@ -11,6 +11,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jar/fastjson-1.2.9.jar"/>
 	<classpathentry kind="lib" path="jar/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="/Users/nieaowei/Downloads/swt-4.9-cocoa-macosx-x86_64/swt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
