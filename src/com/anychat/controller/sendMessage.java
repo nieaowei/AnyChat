@@ -3,22 +3,16 @@ package com.anychat.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.tomcat.jni.Mmap;
 
 import com.alibaba.fastjson.JSON;
 import com.anychat.dao.FriendDao;
@@ -43,37 +37,6 @@ public class sendMessage extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-//    public void init() throws ServletException
-//	{
-//    	super.init();
-//		System.out.println("=================hello world=================");
-//		new Thread() {
-//			private ServerSocket serversocket;
-//
-//			public void run()
-//			{
-//				try {
-//					serversocket = new ServerSocket(6666);
-//					while(true) {
-//						
-//						Socket socket=serversocket.accept();  //进程会阻塞在这句，直到有socket连接进来，就往下执行
-//				        System.out.println("one client has connected1");
-//				        System.out.println(socket.getRemoteSocketAddress().toString());
-//				        String [] strings=socket.getRemoteSocketAddress().toString().split(":");
-//				        String [] strings2=strings[0].split("/");
-//				        System.out.println(strings2[1]);
-//				        lock.lock();
-//				        Chat.put(strings2[1], socket);
-//				        lock.unlock();
-//					}
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}.start();
-//		System.out.println("_______________________hello world___________________________");
-//  }
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
